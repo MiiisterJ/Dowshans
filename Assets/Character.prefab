@@ -194,4 +194,4 @@ MonoBehaviour:
   playermovement: 0
   playerhit: 0
   movementSpeed: 6
-  rotateSpeed: 40
+  rotateSpeed: 60
