@@ -23,10 +23,10 @@ public class PartyMember : MonoBehaviour
     public int maxMana { get; private set; }
     public int Mana;
 
-    public int Level { get; private set; }
+    public int Level { get; private set; } = 1;
     public int Exp;
-    public int NextExp { get { return baseMaxExp * (Level * Level); } }
-    int baseMaxExp = 100;
+    public int NextExp { get { return BASE_MAX_EXP * (Level * Level); } }
+    const int BASE_MAX_EXP = 100;
     const int MAX_LEVEL = 100;
 
     double AtkMultiplier; //Used when a character levels up.
@@ -48,9 +48,9 @@ public class PartyMember : MonoBehaviour
     /// </summary>
     public void UpdateStats()
     {
-        for (int lv = 0; lv <= MAX_LEVEL; lv++)
+        for (int lv = 1; lv <= MAX_LEVEL; lv++)
         {
-            if (Exp >= baseMaxExp * (lv * lv))
+            if (Exp >= BASE_MAX_EXP * (lv * lv))
             {
                 Level = lv;
             }

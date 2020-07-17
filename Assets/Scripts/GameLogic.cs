@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
-    
+    PartyMember[] Character;
 
     // Start is called before the first frame update
     void Start()

@@ -1327,7 +1327,7 @@ MonoBehaviour:
   Name: 
   TextTest: {fileID: 126065700}
   MonsterID: 1
-  Boss: 0
+  Boss: 1
   Level: 2
 --- !u!1 &1924128812
 GameObject:
