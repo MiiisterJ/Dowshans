@@ -69,7 +69,7 @@ public class PartyMember : MonoBehaviour
         switch (_IDnum)
         {
             case 1:
-                Name = "Stanley";
+                Name = "Rocky";
                 baseHP = 100;
                 baseMana = 100;
                 baseAtk = 10;
@@ -79,7 +79,7 @@ public class PartyMember : MonoBehaviour
                 AtkMultiplier = 1.5;
                 break;
             case 2:
-                Name = "Groose";
+                Name = "Luke";
                 baseHP = 100;
                 baseMana = 100;
                 baseAtk = 10;
@@ -89,7 +89,7 @@ public class PartyMember : MonoBehaviour
                 AtkMultiplier = 1.25;
                 break;
             case 3:
-                Name = "GT Goku";
+                Name = "Jane";
                 baseHP = 50;
                 baseMana = 100;
                 baseAtk = 15;
@@ -99,7 +99,7 @@ public class PartyMember : MonoBehaviour
                 AtkMultiplier = 1.2;
                 break;
             case 4:
-                Name = "Side-B Charizard";
+                Name = "Phoenix";
                 baseHP = 130;
                 baseMana = 50;
                 baseAtk = 5;
