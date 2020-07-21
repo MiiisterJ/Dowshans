@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Code by Jihad
+// This is a script which puts the player from one scene to the other by colliding, 
+// It is done so that the enemy/boss will initiate the scene when they touch they player
 public class EnemyBehaviour : MonoBehaviour
 {
     public int scene;
