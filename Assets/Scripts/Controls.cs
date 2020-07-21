@@ -9,7 +9,7 @@ public class Controls : MonoBehaviour
     public bool playerhit;
     public float movementSpeed = 6.0f;
     public float rotateSpeed = 40f;
-
+    public Rigidbody rb;
 
     public float jump_timer;
     private bool jump;
@@ -34,20 +34,24 @@ public class Controls : MonoBehaviour
         transform.Translate(0, 0, verticalInput * movementSpeed * Time.deltaTime);
         transform.Rotate(0, horizontalInput * rotateSpeed * Time.deltaTime, 0);
 
-
-        if (Input.GetKeyDown(KeyCode.Space) && !jump && onGround)
+        if (Input.GetKeyDown(KeyCode.Space) && transform.position.y <= 3.8f)
         {
-            jump_timer = 0.6f;
-            jump = true;
+            rb.AddForce(new Vector3(0, 5, 0),ForceMode.Impulse);
         }
+        //if (Input.GetKeyDown(KeyCode.Space) && !jump && onGround)
+        //{
+        //    jump_timer = 0.6f;
+        //    jump = true;
+        //}
 
-        if (jump && jump_timer > 0)
-        {
-            jump_timer -= Time.deltaTime;
-            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * jumpSpeed, transform.position.z);
-            if (jump_timer <= 0)
-            {
-                jump = false;
-            }
-        }
+        //if (jump && jump_timer > 0)
+        //{
+        //    jump_timer -= Time.deltaTime;
+        //    transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * jumpSpeed, transform.position.z);
+        //    if (jump_timer <= 0)
+        //    {
+        //        jump = true;
+        //    }
+        //}
     }
+}
