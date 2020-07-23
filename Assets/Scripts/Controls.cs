@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Code done by Jihad
+//It is a code to tell the player's movement, and speed, and the rotation
+//The jump function is done by forming a rigidbody to the ground and having the player be able to jump by the rigidbody by pressing the key
 public class Controls : MonoBehaviour
 {
     public float jumpSpeed = 6.0f;
@@ -36,7 +39,7 @@ public class Controls : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && transform.position.y <= 3.8f)
         {
-            rb.AddForce(new Vector3(0, 5, 0),ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 7, 0),ForceMode.Impulse);
         }
         //if (Input.GetKeyDown(KeyCode.Space) && !jump && onGround)
         //{
