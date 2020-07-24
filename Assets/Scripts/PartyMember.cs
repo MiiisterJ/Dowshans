@@ -4,43 +4,70 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// Do NOT apply this to a game object. This is called by the GameLogic script.
-/// 
 /// Coded by Max Seward (1TheBlueWii1)
 /// </summary>
 public class PartyMember : MonoBehaviour
 {
-    public string Name { get; private set; }
+    [ReadOnly] [SerializeField] string _name;
+    public string Name { get { return _name; } private set { _name = value; } }
 
+    public int MemberID;
+
+    public bool InParty;
     
     double HPMultiplier; //Used when a character levels up.
     int baseHP;
-    public int maxHP { get; private set; }
+    [ReadOnly] [SerializeField] int _maxHP;
+    public int maxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public int HP;
 
     double ManaMultiplier; //Used when a character levels up.
     int baseMana;
-    public int maxMana { get; private set; }
+    [ReadOnly] [SerializeField] int _maxMana;
+    public int maxMana { get { return _maxMana; } private set { _maxMana = value; } }
     public int Mana;
 
-    public int Level { get; private set; } = 1;
+    [ReadOnly] [SerializeField] int _level;
+    public int Level { get { return _level; } private set { if (value > 0) _level = value; } }
     public int Exp;
-    public int NextExp { get { return BASE_MAX_EXP * (Level * Level); } }
+    [ReadOnly] [SerializeField] int _nextExp;
+    public int NextExp() { _nextExp = BASE_MAX_EXP * (Level * Level); return _nextExp; }
     const int BASE_MAX_EXP = 100;
     const int MAX_LEVEL = 100;
 
     double AtkMultiplier; //Used when a character levels up.
     int baseAtk;
-    public int Stat_Attack { get; private set; }
+    [ReadOnly] [SerializeField] int _attackPower;
+    public int Stat_Attack{ get { return _attackPower; } private set { _attackPower = value; } }
+
+    public bool UpdateCharacterStats;
 
 
     public PartyMember(int _memberID, int _exp)
     {
-        Character(_memberID);
+        Level = 1;
+
+        MemberID = _memberID;
         Exp = _exp;
 
         //Set maximum stats.
         UpdateStats();
+    }
+
+    public void Start()
+    {
+        Level = 1;
+
+        UpdateStats();
+    }
+
+    public void Update()
+    {
+        if (UpdateCharacterStats)
+        {
+            UpdateStats();
+            UpdateCharacterStats = false;
+        }
     }
 
     /// <summary>
@@ -48,16 +75,31 @@ public class PartyMember : MonoBehaviour
     /// </summary>
     public void UpdateStats()
     {
-        for (int lv = 1; lv <= MAX_LEVEL; lv++)
+        Character(MemberID);
+
+        int prevLevel = Level;
+
+        if (Level > 0)
+        for (int lv = 0; lv <= MAX_LEVEL; lv++)
         {
-            if (Exp >= BASE_MAX_EXP * (lv * lv))
+            if (Exp >= NextExp())
             {
                 Level = lv;
             }
         }
 
-        maxHP = Convert.ToInt32(baseHP * (Level * HPMultiplier));
-        maxMana = Convert.ToInt32(baseMana * (Level * ManaMultiplier));
+            maxHP = Convert.ToInt32(baseHP * (Level * HPMultiplier));
+            maxMana = Convert.ToInt32(baseMana * (Level * ManaMultiplier));
+
+            Stat_Attack = Convert.ToInt32(baseAtk * (Level * AtkMultiplier));
+
+        if (prevLevel < Level) //If the character levels up, health and mana is reset.
+        {
+            HP = maxHP;
+            Mana = maxMana;
+        }
+
+        NextExp();
     }
 
     /// <summary>
@@ -74,8 +116,8 @@ public class PartyMember : MonoBehaviour
                 baseMana = 100;
                 baseAtk = 10;
 
-                HPMultiplier = 1.1;
-                ManaMultiplier = 0.8;
+                HPMultiplier = 0.1;
+                ManaMultiplier = 0.3;
                 AtkMultiplier = 1.5;
                 break;
             case 2:
@@ -84,8 +126,8 @@ public class PartyMember : MonoBehaviour
                 baseMana = 100;
                 baseAtk = 10;
 
-                HPMultiplier = 1.0;
-                ManaMultiplier = 1.0;
+                HPMultiplier = 0.2;
+                ManaMultiplier = 0.2;
                 AtkMultiplier = 1.25;
                 break;
             case 3:
@@ -104,7 +146,7 @@ public class PartyMember : MonoBehaviour
                 baseMana = 50;
                 baseAtk = 5;
 
-                HPMultiplier = 1.25;
+                HPMultiplier = 0.1;
                 ManaMultiplier = 0.5;
                 AtkMultiplier = 2.0;
                 break;
@@ -112,3 +154,5 @@ public class PartyMember : MonoBehaviour
     }
 
 }
+
+

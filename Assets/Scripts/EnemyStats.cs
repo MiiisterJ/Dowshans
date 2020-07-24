@@ -13,13 +13,16 @@ public class EnemyStats : MonoBehaviour
 
 
     int baseHP;
-    public int maxHP { get; private set; }
+    [ReadOnly] [SerializeField] int _maxHP;
+    public int maxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public int HP;
 
-    public int Level { get; private set; }
+    [ReadOnly] [SerializeField] int _level;
+    public int Level { get { return _level; } private set { if (value > 0) _level = value; } }
 
     int baseAtk;
-    public int Stat_Attack { get; private set; }
+    [ReadOnly] [SerializeField] int _attackPower;
+    public int Stat_Attack { get { return _attackPower; } private set { _attackPower = value; } }
 
     public EnemyStats(int _enemyID, bool _IsBoss, int _setLevel)
     {
@@ -43,12 +46,12 @@ public class EnemyStats : MonoBehaviour
             {
                 case 1:
                     Name = "Boss1";
-                    baseHP = 1000;
+                    baseHP = 100;
                     baseAtk = 25;
                     break;
                 case 2:
                     Name = "Boss2";
-                    baseHP = 1000;
+                    baseHP = 100;
                     baseAtk = 25;
                     break;
             }

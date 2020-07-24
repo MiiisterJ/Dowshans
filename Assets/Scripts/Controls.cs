@@ -7,14 +7,13 @@ using UnityEngine;
 //The jump function is done by forming a rigidbody to the ground and having the player be able to jump by the rigidbody by pressing the key
 public class Controls : MonoBehaviour
 {
-    public float jumpSpeed = 6.0f;
     public int playermovement;
     public bool playerhit;
     public float movementSpeed = 6.0f;
     public float rotateSpeed = 40f;
     public Rigidbody rb;
 
-    public float jump_timer;
+    public float JumpHeight = 5;
     private bool jump;
     public bool onGround;
 
@@ -29,6 +28,13 @@ public class Controls : MonoBehaviour
     {
         CalculateMovement();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            onGround = true;
+    }
+
     void CalculateMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -37,9 +43,10 @@ public class Controls : MonoBehaviour
         transform.Translate(0, 0, verticalInput * movementSpeed * Time.deltaTime);
         transform.Rotate(0, horizontalInput * rotateSpeed * Time.deltaTime, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space) && transform.position.y <= 3.8f)
+        if (Input.GetKeyDown(KeyCode.Space) && onGround == true)
         {
-            rb.AddForce(new Vector3(0, 7, 0),ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, JumpHeight, 0),ForceMode.Impulse);
+            onGround = false;
         }
         //if (Input.GetKeyDown(KeyCode.Space) && !jump && onGround)
         //{
