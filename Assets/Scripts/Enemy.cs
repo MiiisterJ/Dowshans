@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public int MonsterID;
     public bool Boss;
     public int Level;
+    public int EnemyAmount;
 
     // Start is called before the first frame update
     void Start()

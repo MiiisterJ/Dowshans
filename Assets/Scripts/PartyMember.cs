@@ -37,7 +37,7 @@ public class PartyMember : MonoBehaviour
 
     double AtkMultiplier; //Used when a character levels up.
     int baseAtk;
-    int _attackPower;
+    [ReadOnly] [SerializeField] int _attackPower;
     public int Stat_Attack{ get { return _attackPower; } private set { _attackPower = value; } }
 
     public bool UpdateCharacterStats;

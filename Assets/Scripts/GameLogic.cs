@@ -33,7 +33,7 @@ public class ReadOnlyDrawer : PropertyDrawer
 
 public class GameLogic : MonoBehaviour
 {
-    public PartyMember[] Character = new PartyMember[4]; // In the box, put numbers from 0 to 3.
+    public PartyMember[] Character = new PartyMember[4]; // In the box [], put numbers from 0 to 3.
 
     int GameMode;
 
@@ -45,6 +45,8 @@ public class GameLogic : MonoBehaviour
     {
         UI_Update();
         testOutput++;
+
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
