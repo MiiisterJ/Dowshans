@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     EnemyStats Monster;
     [ReadOnly] [SerializeField]
     string Name;
-    public TextMesh TextTest;
 
     public int MonsterID;
     public bool Boss;
@@ -19,7 +18,6 @@ public class Enemy : MonoBehaviour
     {
         Monster = new EnemyStats(MonsterID, Boss, Level);
         Name = Monster.Name;
-        TextTest.text = Name + " lvl. " + Monster.Level;
     }
 
     // Update is called once per frame
