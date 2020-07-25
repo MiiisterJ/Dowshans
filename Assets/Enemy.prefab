@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 1
+  EnemyType: {fileID: 2256316803827380756}
 --- !u!114 &2256316803827380756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +126,4 @@ MonoBehaviour:
   MonsterID: 1
   Boss: 0
   Level: 0
+  EnemyAmount: 0

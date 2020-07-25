@@ -26,6 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            DontDestroyOnLoad(EnemyType);
             SceneManager.LoadScene(scene);
         }
     }
