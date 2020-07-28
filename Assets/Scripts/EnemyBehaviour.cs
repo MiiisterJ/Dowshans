@@ -8,26 +8,87 @@ using UnityEngine.SceneManagement;
 // It is done so that the enemy/boss will initiate the scene when they touch they player
 public class EnemyBehaviour : MonoBehaviour
 {
-    public int scene;
+    public GameObject player;
+    Scene currentScene; 
+
+    string enterScene = "Battle Scene";
     public Enemy EnemyType;
+
+    float player_x;
+    float player_z;
+
+    float monster_x;
+    float monster_z;
+
+    bool followPlayer;
+    public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.Find("Character");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == "Rocky Mountains" || currentScene.name == "Dark Castle")
+            FollowPlayer();
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             DontDestroyOnLoad(EnemyType);
-            SceneManager.LoadScene(scene);
+            SceneManager.LoadScene(enterScene);
+        }
+    }
+
+    void FollowPlayer()
+    {
+        player_x = player.transform.position.x;
+        player_z = player.transform.position.z;
+
+        monster_x = transform.position.x;
+        monster_z = transform.position.z;
+
+        if (monster_x > player_x)
+        {
+            monster_x -= Time.deltaTime * moveSpeed;
+        }
+        if (monster_x < player_x)
+        {
+            monster_x += Time.deltaTime * moveSpeed;
+        }
+        if (monster_z > player_z)
+        {
+            monster_z -= Time.deltaTime * moveSpeed;
+        }
+        if (monster_z < player_z)
+        {
+            monster_z += Time.deltaTime * moveSpeed;
+        }
+
+        if (followPlayer)
+        {
+            transform.position = new Vector3(monster_x, transform.position.y, monster_z);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            followPlayer = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            followPlayer = false;
         }
     }
 

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEditor;
+using System;
 
 #region Read Only Inspector
 public class ReadOnlyAttribute : PropertyAttribute
@@ -33,6 +35,10 @@ public class ReadOnlyDrawer : PropertyDrawer
 
 public class GameLogic : MonoBehaviour
 {
+    public Scene ActiveScene;
+    public string SceneName;
+    public LoadSceneMode SceneMode;
+
     public PartyMember[] Character = new PartyMember[4];
 
     int GameMode;
@@ -40,21 +46,32 @@ public class GameLogic : MonoBehaviour
     [ReadOnly] [SerializeField]
     int testOutput;
 
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        UI_Update();
         testOutput++;
-
-        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
     void Update()
     {
+        ActiveScene = SceneManager.GetActiveScene();
+        if (SceneName != ActiveScene.name)
+        {
+            SceneName = ActiveScene.name;
+            if (SceneName == "Rocky Mountains" || SceneName == "Dark Castle")
+                UI_Update();
+        }
+
         if (UpdateUI)
         {
-            UI_Update();
+            if (SceneName == "Rocky Mountains" || SceneName == "Dark Castle")
+                UI_Update();
             testOutput++;
             UpdateUI = false;
         }

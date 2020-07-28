@@ -1160,8 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 167286187}
+  moveSpeed: 0
 --- !u!114 &167286187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,8 +1475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 188803495}
+  moveSpeed: 0
 --- !u!114 &188803495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,8 +2254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 370072284}
+  moveSpeed: 0
 --- !u!114 &370072284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2846,8 +2849,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 469928115}
+  moveSpeed: 0
 --- !u!114 &469928115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3252,8 +3256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 522305887}
+  moveSpeed: 0
 --- !u!114 &522305887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3378,8 +3383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 553794871}
+  moveSpeed: 0
 --- !u!114 &553794871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3504,8 +3510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 586219912}
+  moveSpeed: 0
 --- !u!114 &586219912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3909,8 +3916,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 613847681}
+  moveSpeed: 0
 --- !u!114 &613847681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4128,8 +4136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 636236885}
+  moveSpeed: 0
 --- !u!114 &636236885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4254,8 +4263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 638381141}
+  moveSpeed: 0
 --- !u!114 &638381141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5684,8 +5694,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 916087982}
+  moveSpeed: 0
 --- !u!114 &916087982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9075,11 +9086,6 @@ PrefabInstance:
       propertyPath: onGround
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4534450920054332898, guid: 3aa3096be3cef16469e30663911b459a,
-        type: 3}
-      propertyPath: JumpHeight
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4534450920054332899, guid: 3aa3096be3cef16469e30663911b459a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10845,8 +10851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
+  player: {fileID: 0}
   EnemyType: {fileID: 1992400434}
+  moveSpeed: 0
 --- !u!114 &1992400434
 MonoBehaviour:
   m_ObjectHideFlags: 0

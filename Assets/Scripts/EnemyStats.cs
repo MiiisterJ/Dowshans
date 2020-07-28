@@ -70,17 +70,7 @@ public class EnemyStats : MonoBehaviour
                     baseAtk = 3;
                     break;
                 case 3:
-                    Name = "";
-                    baseHP = 10;
-                    baseAtk = 3;
-                    break;
-                case 4:
-                    Name = "";
-                    baseHP = 10;
-                    baseAtk = 3;
-                    break;
-                case 5:
-                    Name = "";
+                    Name = "Enemy3";
                     baseHP = 10;
                     baseAtk = 3;
                     break;
