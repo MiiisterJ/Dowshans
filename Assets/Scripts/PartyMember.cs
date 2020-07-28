@@ -1,158 +1,98 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
-/// <summary>
-/// Coded by Max Seward (1TheBlueWii1)
-/// </summary>
 public class PartyMember : MonoBehaviour
 {
-    [ReadOnly] [SerializeField] string _name;
-    public string Name { get { return _name; } private set { _name = value; } }
+    public Data data;
+    public int memberID;
+    public string memberName;
+    public int level;
+    public int statScale;
 
-    public int MemberID;
-
-    public bool InParty;
-    
-    double HPMultiplier; //Used when a character levels up.
-    int baseHP;
-    [ReadOnly] [SerializeField] int _maxHP;
-    public int maxHP { get { return _maxHP; } private set { _maxHP = value; } }
+    public int maxHP;
     public int HP;
-
-    double ManaMultiplier; //Used when a character levels up.
-    int baseMana;
-    [ReadOnly] [SerializeField] int _maxMana;
-    public int maxMana { get { return _maxMana; } private set { _maxMana = value; } }
-    public int Mana;
-
-    [ReadOnly] [SerializeField] int _level;
-    public int Level { get { return _level; } private set { if (value > 0) _level = value; } }
-    public int Exp;
-    [ReadOnly] [SerializeField] int _nextExp;
-    public int NextExp() { _nextExp = BASE_MAX_EXP * (Level * Level); return _nextExp; }
-    const int BASE_MAX_EXP = 100;
-    const int MAX_LEVEL = 100;
-
-    double AtkMultiplier; //Used when a character levels up.
-    int baseAtk;
-    [ReadOnly] [SerializeField] int _attackPower;
-    public int Stat_Attack{ get { return _attackPower; } private set { _attackPower = value; } }
-
-    public bool UpdateCharacterStats;
+    public int maxDamage;
+    public int minDamage;
+    public int damage;
+    public int exp;
+    public int maxEXP;
 
 
-    public PartyMember(int _memberID, int _exp)
+    // Start is called before the first frame update
+    void Start()
     {
-        Level = 1;
-
-        MemberID = _memberID;
-        Exp = _exp;
-
-        //Set maximum stats.
-        UpdateStats();
-    }
-
-    public void Start()
-    {
-        Level = 1;
-
-        UpdateStats();
-    }
-
-    public void Update()
-    {
-        if (UpdateCharacterStats)
+        data = FindObjectOfType<Data>();
+        if(level == 0)
         {
-            UpdateStats();
-            UpdateCharacterStats = false;
+            level = 1;
+        }
+        if(memberID == 0)
+        {
+            memberName = data.memberName1;
+            level = data.level1;
+            statScale = data.statScale1;
+            maxHP = data.maxHP1;
+            HP = data.HP1;
+            exp = data.exp1;
+            maxEXP = data.maxEXP1;
+
+        }
+        if (memberID == 1)
+        {
+            memberName = data.memberName2;
+            level = data.level2;
+            statScale = data.statScale2;
+            maxHP = data.maxHP2;
+            HP = data.HP2;
+            exp = data.exp2;
+            maxEXP = data.maxEXP2;
+
+        }
+        if (memberID == 2)
+        {
+            memberName = data.memberName3;
+            level = data.level3;
+            statScale = data.statScale3;
+            maxHP = data.maxHP3;
+            HP = data.HP3;
+            exp = data.exp3;
+            maxEXP = data.maxEXP3;
+
+        }
+        if (memberID == 3)
+        {
+            memberName = data.memberName4;
+            level = data.level4;
+            statScale = data.statScale4;
+            maxHP = data.maxHP4;
+            HP = data.HP4;
+            exp = data.exp4;
+            maxEXP = data.maxEXP4;
+
         }
     }
 
-    /// <summary>
-    /// In case a character levels up, run this to update the character's maximum HP and Mana.
-    /// </summary>
-    public void UpdateStats()
+    // Update is called once per frame
+    void Update()
     {
-        Character(MemberID);
+        CalculateStats();
+    }
 
-        int prevLevel = Level;
-
-        if (Level > 0)
-        for (int lv = 0; lv <= MAX_LEVEL; lv++)
-        {
-            if (Exp >= NextExp())
-            {
-                Level = lv;
-            }
-        }
-
-            maxHP = Convert.ToInt32(baseHP * (Level * HPMultiplier));
-            maxMana = Convert.ToInt32(baseMana * (Level * ManaMultiplier));
-
-            Stat_Attack = Convert.ToInt32(baseAtk * (Level * AtkMultiplier));
-
-        if (prevLevel < Level) //If the character levels up, health and mana is reset.
+    void CalculateStats()
+    {
+        minDamage = level * statScale / 3;
+        maxDamage = level * 2 * statScale / 3;
+        damage = Random.Range(minDamage, maxDamage);
+        maxEXP = 100 * level / 5;
+        if(HP > maxHP)
         {
             HP = maxHP;
-            Mana = maxMana;
         }
-
-        NextExp();
-    }
-
-    /// <summary>
-    /// Profile of party members you have.
-    /// </summary>
-    /// <param name="_IDnum">Profile ID number.</param>
-    private void Character(int _IDnum)
-    {
-        switch (_IDnum)
+        if( exp > maxEXP)
         {
-            case 1:
-                Name = "Rocky";
-                baseHP = 100;
-                baseMana = 100;
-                baseAtk = 10;
-
-                HPMultiplier = 0.1;
-                ManaMultiplier = 0.3;
-                AtkMultiplier = 1.5;
-                break;
-            case 2:
-                Name = "Luke";
-                baseHP = 100;
-                baseMana = 100;
-                baseAtk = 10;
-
-                HPMultiplier = 0.2;
-                ManaMultiplier = 0.2;
-                AtkMultiplier = 1.25;
-                break;
-            case 3:
-                Name = "Jane";
-                baseHP = 50;
-                baseMana = 100;
-                baseAtk = 15;
-
-                HPMultiplier = 0.5;
-                ManaMultiplier = 1.2;
-                AtkMultiplier = 1.2;
-                break;
-            case 4:
-                Name = "Phoenix";
-                baseHP = 130;
-                baseMana = 50;
-                baseAtk = 5;
-
-                HPMultiplier = 0.1;
-                ManaMultiplier = 0.5;
-                AtkMultiplier = 2.0;
-                break;
+            exp = 0;
+            level++;
         }
     }
-
 }
-
-
