@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1673806645368249073}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   movementSpeed: 6
   rotateSpeed: 60
   rb: {fileID: 1673806645368249073}
-  JumpHeight: 0
+  JumpHeight: 6
   onGround: 0
 --- !u!54 &1673806645368249073
 Rigidbody:

@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Title Screen.unity
+    guid: 67bb497e9a189ba4bb8410a2ba7a553a
+  - enabled: 1
     path: Assets/Scenes/Rocky Mountains.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Battle Scene.unity
     guid: 4ee55b18572fc824791757c04ed9e46d
   - enabled: 1
-    path: Assets/Scenes/Dark Castle Scene.unity
+    path: Assets/Scenes/Dark Castle.unity
     guid: fee76f1dcf59dea4d8faedc5eba303ba
   m_configObjects: {}

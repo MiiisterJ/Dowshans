@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaa209462deb1940a55a62429ed5b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveScene:
+    m_Handle: 0
+  SceneName: 
+  SceneMode: 0
   Character:
   - {fileID: 9140027063254424607}
   - {fileID: 9140027063566214067}
@@ -105,7 +109,7 @@ MonoBehaviour:
   _maxMana: 0
   Mana: 0
   _level: 0
-  Exp: 99877
+  Exp: 0
   _nextExp: 0
   _attackPower: 0
   UpdateCharacterStats: 0
@@ -160,7 +164,7 @@ MonoBehaviour:
   _maxMana: 0
   Mana: 0
   _level: 0
-  Exp: 99877
+  Exp: 0
   _nextExp: 0
   _attackPower: 0
   UpdateCharacterStats: 0
@@ -215,7 +219,7 @@ MonoBehaviour:
   _maxMana: 0
   Mana: 0
   _level: 0
-  Exp: 99877
+  Exp: 0
   _nextExp: 0
   _attackPower: 0
   UpdateCharacterStats: 0
@@ -270,7 +274,7 @@ MonoBehaviour:
   _maxMana: 0
   Mana: 0
   _level: 0
-  Exp: 99877
+  Exp: 0
   _nextExp: 0
   _attackPower: 0
   UpdateCharacterStats: 0
