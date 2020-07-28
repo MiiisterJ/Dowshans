@@ -47,18 +47,26 @@ public class PartyMember : MonoBehaviour
     {
         Level = 1;
 
+
         MemberID = _memberID;
         Exp = _exp;
 
         //Set maximum stats.
         UpdateStats();
+
+        HP = maxHP;
+        Mana = maxMana;
     }
 
     public void Start()
     {
         Level = 1;
 
+
         UpdateStats();
+
+        HP = maxHP;
+        Mana = maxMana;
     }
 
     public void Update()
@@ -99,6 +107,11 @@ public class PartyMember : MonoBehaviour
             Mana = maxMana;
         }
 
+        if (HP > maxHP)
+            HP = maxHP;
+        if (Mana > maxMana)
+            Mana = maxMana;
+
         NextExp();
     }
 
@@ -116,7 +129,7 @@ public class PartyMember : MonoBehaviour
                 baseMana = 100;
                 baseAtk = 10;
 
-                HPMultiplier = 0.1;
+                HPMultiplier = 0.2;
                 ManaMultiplier = 0.3;
                 AtkMultiplier = 1.5;
                 break;
@@ -126,18 +139,18 @@ public class PartyMember : MonoBehaviour
                 baseMana = 100;
                 baseAtk = 10;
 
-                HPMultiplier = 0.2;
+                HPMultiplier = 0.25;
                 ManaMultiplier = 0.2;
                 AtkMultiplier = 1.25;
                 break;
             case 3:
                 Name = "Jane";
                 baseHP = 50;
-                baseMana = 100;
+                baseMana = 60;
                 baseAtk = 15;
 
-                HPMultiplier = 0.5;
-                ManaMultiplier = 1.2;
+                HPMultiplier = 0.1;
+                ManaMultiplier = 0.6;
                 AtkMultiplier = 1.2;
                 break;
             case 4:
@@ -146,7 +159,7 @@ public class PartyMember : MonoBehaviour
                 baseMana = 50;
                 baseAtk = 5;
 
-                HPMultiplier = 0.1;
+                HPMultiplier = 0.08;
                 ManaMultiplier = 0.5;
                 AtkMultiplier = 2.0;
                 break;

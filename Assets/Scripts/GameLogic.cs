@@ -33,10 +33,10 @@ public class ReadOnlyDrawer : PropertyDrawer
 
 public class GameLogic : MonoBehaviour
 {
-    public PartyMember[] Character = new PartyMember[4]; // In the box [], put numbers from 0 to 3.
+    public PartyMember[] Character = new PartyMember[4];
 
     int GameMode;
-
+    public bool UpdateUI;
     [ReadOnly] [SerializeField]
     int testOutput;
 
@@ -52,8 +52,12 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //UI_Update();
-        //testOutput++;
+        if (UpdateUI)
+        {
+            UI_Update();
+            testOutput++;
+            UpdateUI = false;
+        }
     }
 
     void LoadFile_ExperiencePoints()
@@ -87,4 +91,6 @@ public class GameLogic : MonoBehaviour
             }
         }
     }
+
+
 }
