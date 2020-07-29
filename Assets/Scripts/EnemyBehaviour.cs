@@ -9,10 +9,11 @@ using UnityEngine.SceneManagement;
 public class EnemyBehaviour : MonoBehaviour
 {
     public GameObject player;
-    Scene currentScene; 
+    Scene currentScene;
+    Rigidbody rb;
 
     string enterScene = "Battle Scene";
-    public Enemy EnemyType;
+    public EnemyStats EnemyType;
 
     float player_x;
     float player_z;
@@ -26,6 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Character");
     }
 
@@ -42,6 +44,9 @@ public class EnemyBehaviour : MonoBehaviour
         {
             DontDestroyOnLoad(EnemyType);
             SceneManager.LoadScene(enterScene);
+            transform.position = new Vector3(-16, 2, -6);
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+
         }
     }
 

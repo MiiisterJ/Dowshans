@@ -9,20 +9,36 @@ using UnityEngine;
 /// </summary>
 public class EnemyStats : MonoBehaviour
 {
-    public string Name { get; private set; }
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    string _name;
+    public string Name { get { return _name; } private set { _name = value; } }
 
 
     int baseHP;
-    [ReadOnly] [SerializeField] int _maxHP;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _maxHP;
     public int maxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public int HP;
 
-    [ReadOnly] [SerializeField] int _level;
-    public int Level { get { return _level; } private set { if (value > 0) _level = value; } }
+//#if DEBUG
+//    [ReadOnly] [SerializeField]
+//#endif
+//    int _level;
+    public int Level; //{ get { return _level; } private set { if (value <= 0) _level = 1; else _level = value; } }
 
     int baseAtk;
-    [ReadOnly] [SerializeField] int _attackPower;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _attackPower;
     public int Stat_Attack { get { return _attackPower; } private set { _attackPower = value; } }
+
+    public bool isBoss;
+    public int enemyID;
 
     public EnemyStats(int _enemyID, bool _IsBoss, int _setLevel)
     {
@@ -30,8 +46,25 @@ public class EnemyStats : MonoBehaviour
         Level = _setLevel;
 
         //Set maximum stats
+        
+    }
+
+    public void Start()
+    {
+        if (Level <= 0)
+            Level = 1;
+
+        UpdateStats();
+    }
+
+    void UpdateStats()
+    {
+        Creature(enemyID, isBoss);
+
         maxHP = baseHP * Level;
         Stat_Attack = baseAtk * Level;
+
+        HP = maxHP;
     }
 
     /// <summary>
@@ -60,7 +93,7 @@ public class EnemyStats : MonoBehaviour
             {
                 case 1:
                 default:
-                    Name = "Enemy1";
+                    Name = "Boogyman";
                     baseHP = 10;
                     baseAtk = 3;
                     break;
