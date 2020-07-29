@@ -48,20 +48,6 @@ public class Controls : MonoBehaviour
             rb.AddForce(new Vector3(0, JumpHeight, 0),ForceMode.Impulse);
             onGround = false;
         }
-        //if (Input.GetKeyDown(KeyCode.Space) && !jump && onGround)
-        //{
-        //    jump_timer = 0.6f;
-        //    jump = true;
-        //}
-
-        //if (jump && jump_timer > 0)
-        //{
-        //    jump_timer -= Time.deltaTime;
-        //    transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * jumpSpeed, transform.position.z);
-        //    if (jump_timer <= 0)
-        //    {
-        //        jump = true;
-        //    }
-        //}
+        
     }
 }

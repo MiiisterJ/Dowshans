@@ -6,24 +6,58 @@ using UnityEngine.UI;
 public class BattleMode : MonoBehaviour
 {
     GameLogic gl;
-    Enemy opponent;
+    public EnemyStats opponent;
 
     public int TestOutput;
 
+    public int rng;
+
+    int BattleState;
+
+    public bool RerollRNG;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gl = FindObjectOfType<GameLogic>();
-        opponent = FindObjectOfType<Enemy>();
-        UIParty_Update();
-        UIEnemy_Update();
-        TestOutput = opponent.MonsterID;
+        opponent = FindObjectOfType<EnemyStats>();
+        //TestOutput = opponent.enemyID;
+        //UIParty_Update();
+        //UIEnemy_Update();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (RerollRNG)
+        {
+            Turntable();
+            RerollRNG = false;
+        }
+    }
+
+    void DiceRollSetOrder()
+    {
+
+    }
+
+    void Turntable() //Each character taking turns
+    {
+        rng = Random.Range(1, 6);
+    }
+
+    void StateCheck() // Swtich statement indicating what stat the battle is in.
+    {
+        switch (BattleState)
+        {
+            case 1: //Player or enemy turn
+                break;
+            case 2: //Attack/Ability state. Calculate damage or healing.
+                break;
+            case 3: //End turn state. Switch to next person.
+                break; 
+        }
     }
 
     void UIParty_Update()
@@ -73,22 +107,14 @@ public class BattleMode : MonoBehaviour
 
     void UIEnemy_Update()
     {
-        GameObject UIPanel;
+        Text UITextBox;
         //Enemy UI
-        if (opponent.EnemyAmount <= 1)
-        {
-            UIPanel = GameObject.Find("EnemyPanel 2");
-            UIPanel.SetActive(false);
-        }
-        if (opponent.EnemyAmount <= 2)
-        {
-            UIPanel = GameObject.Find("EnemyPanel 3");
-            UIPanel.SetActive(false);
-        }
-        if (opponent.EnemyAmount <= 3)
-        {
-            UIPanel = GameObject.Find("EnemyPanel Boss");
-            UIPanel.SetActive(false);
-        }
+        UITextBox = GameObject.Find("EnemyPanel/Name").GetComponent<Text>();
+        UITextBox.text = opponent.Name;
+        UITextBox = GameObject.Find("EnemyPanel/HP/Value").GetComponent<Text>();
+        UITextBox.text = opponent.HP + " / " + opponent.maxHP;
+
+
+
     }
 }

@@ -7,6 +7,7 @@ using UnityEditor;
 using System;
 
 #region Read Only Inspector
+#if DEBUG
 public class ReadOnlyAttribute : PropertyAttribute
 {
 
@@ -31,6 +32,8 @@ public class ReadOnlyDrawer : PropertyDrawer
         GUI.enabled = true;
     }
 }
+
+#endif
 #endregion
 
 public class GameLogic : MonoBehaviour
@@ -43,7 +46,9 @@ public class GameLogic : MonoBehaviour
 
     int GameMode;
     public bool UpdateUI;
+#if DEBUG
     [ReadOnly] [SerializeField]
+#endif
     int testOutput;
 
 
