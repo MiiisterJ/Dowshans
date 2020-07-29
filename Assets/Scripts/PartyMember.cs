@@ -8,7 +8,10 @@ using UnityEngine;
 /// </summary>
 public class PartyMember : MonoBehaviour
 {
-    [ReadOnly] [SerializeField] string _name;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    string _name;
     public string Name { get { return _name; } private set { _name = value; } }
 
     public int MemberID;
@@ -17,27 +20,42 @@ public class PartyMember : MonoBehaviour
     
     double HPMultiplier; //Used when a character levels up.
     int baseHP;
-    [ReadOnly] [SerializeField] int _maxHP;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _maxHP;
     public int maxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public int HP;
 
     double ManaMultiplier; //Used when a character levels up.
     int baseMana;
-    [ReadOnly] [SerializeField] int _maxMana;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _maxMana;
     public int maxMana { get { return _maxMana; } private set { _maxMana = value; } }
     public int Mana;
 
-    [ReadOnly] [SerializeField] int _level;
-    public int Level { get { return _level; } private set { if (value > 0) _level = value; } }
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _level;
+    public int Level { get { return _level; } private set { if (value <= 0) _level = 1; else _level = value; } }
     public int Exp;
-    [ReadOnly] [SerializeField] int _nextExp;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _nextExp;
     public int NextExp() { _nextExp = BASE_MAX_EXP * (Level * Level); return _nextExp; }
     const int BASE_MAX_EXP = 100;
     const int MAX_LEVEL = 100;
 
     double AtkMultiplier; //Used when a character levels up.
     int baseAtk;
-    [ReadOnly] [SerializeField] int _attackPower;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    int _attackPower;
     public int Stat_Attack{ get { return _attackPower; } private set { _attackPower = value; } }
 
     public bool UpdateCharacterStats;
