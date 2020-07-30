@@ -713,6 +713,11 @@ PrefabInstance:
       propertyPath: InParty
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9140027062798115573, guid: a4f24d96fa61fa1489d6e513e06b6ef8,
+        type: 3}
+      propertyPath: Exp
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 9140027063566214067, guid: a4f24d96fa61fa1489d6e513e06b6ef8,
         type: 3}
       propertyPath: InParty

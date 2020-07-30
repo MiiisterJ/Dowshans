@@ -20,9 +20,23 @@ public class BattleMode : MonoBehaviour
     bool Reroll;
     bool SortOrder;
 
+    Button AttackButt, DefendButt, SpecialButt, RunButt;
+
     // Start is called before the first frame update
     void Awake()
     {
+        //Assigning Buttons
+        AttackButt = GameObject.Find("AttackButton").GetComponent<Button>();
+        DefendButt = GameObject.Find("DefendButton").GetComponent<Button>();
+        SpecialButt = GameObject.Find("SpecialButton").GetComponent<Button>();
+        RunButt = GameObject.Find("RunButton").GetComponent<Button>();
+
+        AttackButt.onClick.AddListener(ButtonFunction_Attack);
+        DefendButt.onClick.AddListener(ButtonFunction_Defend);
+        SpecialButt.onClick.AddListener(ButtonFunction_Special);
+        RunButt.onClick.AddListener(ButtonFunction_Run);
+
+
         gl = FindObjectOfType<GameLogic>();
         opponent = FindObjectOfType<EnemyStats>();
         UIParty_Update();
@@ -41,6 +55,7 @@ public class BattleMode : MonoBehaviour
         else if (SortOrder)
         {
             Turntable(2);
+            UITurn_Update();
         }
 
         if (DebugRerollRNG)
@@ -50,6 +65,8 @@ public class BattleMode : MonoBehaviour
         }
         if (UnitIndex.Count != 0)
             TestOutput = UnitIndex[0];
+
+        StateCheck();
     }
 
     int DiceRollSetOrder()
@@ -106,10 +123,20 @@ public class BattleMode : MonoBehaviour
 
     void StateCheck() // Swtich statement indicating what stat the battle is in.
     {
+        Image UIImageBox;
         switch (BattleState)
         {
             case 1: //Player or enemy turn
-
+                if (UnitIndex[0] < 4) //Player Turn
+                {
+                    UIImageBox = GameObject.Find("UserInput").GetComponent<Image>();
+                    UIImageBox.enabled = true;
+                }
+                else
+                {
+                    UIImageBox = GameObject.Find("UserInput").GetComponent<Image>();
+                    UIImageBox.enabled = false;
+                }
                 break;
             case 2: //When a action is selected, activate action
 
@@ -155,6 +182,7 @@ public class BattleMode : MonoBehaviour
     void UITurn_Update()
     {
         Image UIImageBox;
+        //Party Member Arrows
         for (int i = 0; i < gl.Character.Length; i++)
         {
             UIImageBox = GameObject.Find("Panel " + (i + 1) + "/Arrow").GetComponent<Image>();
@@ -164,5 +192,40 @@ public class BattleMode : MonoBehaviour
                 UIImageBox.enabled = false;
 
         }
+        //Enemy Arrow
+        UIImageBox = GameObject.Find("EnemyPanel/Arrow").GetComponent<Image>();
+        if (UnitIndex[0] == 4)
+            UIImageBox.enabled = true;
+        else
+            UIImageBox.enabled = false;
+
+        // "Someone's Turn"
+        Text UITextBox;
+        string endingText = "'s Turn";
+        UITextBox = GameObject.Find("UnitTurn").GetComponent<Text>();
+        for (int i = 0; i < gl.Character.Length; i++)
+        {
+            if (UnitIndex[0] == i)
+                UITextBox.text = gl.Character[i].Name + endingText;
+        }
+        if (UnitIndex[0] == 4)
+            UITextBox.text = opponent.Name + endingText;
+    }
+
+    void ButtonFunction_Attack()
+    {
+        
+    }
+    void ButtonFunction_Defend()
+    {
+
+    }
+    void ButtonFunction_Special()
+    {
+
+    }
+    void ButtonFunction_Run()
+    {
+
     }
 }

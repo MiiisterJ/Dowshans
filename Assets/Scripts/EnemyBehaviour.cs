@@ -45,7 +45,11 @@ public class EnemyBehaviour : MonoBehaviour
             DontDestroyOnLoad(EnemyType);
             SceneManager.LoadScene(enterScene);
             transform.position = new Vector3(-16, 2, -6);
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            try
+            {
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+            catch { }
 
         }
     }
