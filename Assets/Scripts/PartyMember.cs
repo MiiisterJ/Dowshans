@@ -63,9 +63,6 @@ public class PartyMember : MonoBehaviour
 
     public PartyMember(int _memberID, int _exp)
     {
-        Level = 1;
-
-
         MemberID = _memberID;
         Exp = _exp;
 
@@ -78,9 +75,6 @@ public class PartyMember : MonoBehaviour
 
     public void Start()
     {
-        Level = 1;
-
-
         UpdateStats();
 
         HP = maxHP;
@@ -106,14 +100,15 @@ public class PartyMember : MonoBehaviour
         int prevLevel = Level;
 
         if (Level > 0)
-        for (int lv = 0; lv <= MAX_LEVEL; lv++)
-        {
-            if (Exp >= NextExp())
+            for (int lv = 0; lv <= MAX_LEVEL; lv++)
             {
-                Level = lv;
+                if (Exp >= NextExp())
+                {
+                    Level = lv;
+                }
             }
-        }
-
+        else
+            Level = 1;
             maxHP = Convert.ToInt32(baseHP * (Level * HPMultiplier));
             maxMana = Convert.ToInt32(baseMana * (Level * ManaMultiplier));
 

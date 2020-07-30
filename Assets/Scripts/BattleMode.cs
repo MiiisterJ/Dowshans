@@ -10,11 +10,14 @@ public class BattleMode : MonoBehaviour
 
     public int TestOutput;
 
-    public int rng;
+    public int dice;
 
     int BattleState;
 
-    public bool RerollRNG;
+    public List<int> UnitIndex = new List<int>();
+    public int[] UnitRoll = new int[5]; // 1 to 4 are the party members. 5 is the enemy.
+    public bool DebugRerollRNG;
+    bool Reroll;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,27 +27,72 @@ public class BattleMode : MonoBehaviour
         //TestOutput = opponent.enemyID;
         //UIParty_Update();
         //UIEnemy_Update();
-
+        Turntable(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (RerollRNG)
+        if (Reroll)
         {
-            Turntable();
-            RerollRNG = false;
+            Reroll = false;
+            Turntable(1);
+        }
+
+        if (DebugRerollRNG)
+        {
+            DiceRollSetOrder();
+            DebugRerollRNG = false;
         }
     }
 
-    void DiceRollSetOrder()
+    int DiceRollSetOrder()
     {
-
+        dice = Random.Range(1, 11);
+        return dice;
     }
 
-    void Turntable() //Each character taking turns
+    void Turntable(int _state) //Each character taking turns
     {
-        rng = Random.Range(1, 6);
+        switch (_state)
+        {
+            case 1: //Sets a value for each unit. Higher the value, the first to make a move.
+                for (int i = 0; i < UnitRoll.Length; i++)
+                {
+                    UnitRoll[i] = DiceRollSetOrder();
+                }
+                for (int f = 0; f < UnitRoll.Length; f++) //Checks if there's a tie in the dice roll.
+                {
+                    for (int l = 0; l < UnitRoll.Length; l++)
+                    {
+                        if (f != l) //Prevents the same index from comparing to each other.
+                        {
+                            if (UnitRoll[f] == UnitRoll[l])
+                            {
+                                UnitRoll[f] = DiceRollSetOrder();
+                                UnitRoll[l] = DiceRollSetOrder();
+                            }
+                            if (UnitRoll[f] == UnitRoll[l])
+                            {
+                                Reroll = true;
+                            }
+                        }
+                    }
+                }
+                break;
+            case 2: //Set list of turns
+                for (int d = 11; d > 0; d--)
+                {
+                    for (int i = 0; i < UnitRoll.Length; i++)
+                    {
+                        if (UnitRoll[i] == d)
+                        {
+                            UnitIndex.Add(3);
+                        }
+                    }
+                }
+                break;
+        }
     }
 
     void StateCheck() // Swtich statement indicating what stat the battle is in.
@@ -52,10 +100,16 @@ public class BattleMode : MonoBehaviour
         switch (BattleState)
         {
             case 1: //Player or enemy turn
+
                 break;
-            case 2: //Attack/Ability state. Calculate damage or healing.
+            case 2: //When a action is selected, activate action
+
                 break;
-            case 3: //End turn state. Switch to next person.
+            case 3: //Attack/Ability state. Calculate damage or healing.
+
+                break;
+            case 4: //End turn state. Switch to next person.
+
                 break; 
         }
     }
