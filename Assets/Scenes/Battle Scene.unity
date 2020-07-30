@@ -731,7 +731,8 @@ MonoBehaviour:
   opponent: {fileID: 0}
   TestOutput: 0
   dice: 0
-  UnitIndex: 0000000000000000000000000000000000000000
+  UnitIndex: 
+  UnitRoll: 0000000000000000000000000000000000000000
   DebugRerollRNG: 0
 --- !u!4 &798855098
 Transform:
@@ -882,7 +883,7 @@ PrefabInstance:
     - target: {fileID: 5157608279851062113, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
       propertyPath: m_Name
-      value: Panel B
+      value: Panel 2
       objectReference: {fileID: 0}
     - target: {fileID: 5157608279851062114, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
@@ -1797,7 +1798,7 @@ PrefabInstance:
     - target: {fileID: 5157608279851062113, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
       propertyPath: m_Name
-      value: Panel A
+      value: Panel 1
       objectReference: {fileID: 0}
     - target: {fileID: 5157608279851062113, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
@@ -1942,7 +1943,7 @@ PrefabInstance:
     - target: {fileID: 5157608279851062113, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
       propertyPath: m_Name
-      value: Panel D
+      value: Panel 4
       objectReference: {fileID: 0}
     - target: {fileID: 5157608279851062114, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
@@ -2474,7 +2475,7 @@ PrefabInstance:
     - target: {fileID: 5157608279851062113, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}
       propertyPath: m_Name
-      value: Panel C
+      value: Panel 3
       objectReference: {fileID: 0}
     - target: {fileID: 5157608279851062114, guid: 537653de41c69eb44b4a04d3da8aa230,
         type: 3}

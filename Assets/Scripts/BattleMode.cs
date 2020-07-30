@@ -18,16 +18,17 @@ public class BattleMode : MonoBehaviour
     public int[] UnitRoll = new int[5]; // 1 to 4 are the party members. 5 is the enemy.
     public bool DebugRerollRNG;
     bool Reroll;
+    bool SortOrder;
 
     // Start is called before the first frame update
     void Awake()
     {
         gl = FindObjectOfType<GameLogic>();
         opponent = FindObjectOfType<EnemyStats>();
-        //TestOutput = opponent.enemyID;
-        //UIParty_Update();
-        //UIEnemy_Update();
+        UIParty_Update();
+        UIEnemy_Update();
         Turntable(1);
+
     }
 
     // Update is called once per frame
@@ -35,8 +36,11 @@ public class BattleMode : MonoBehaviour
     {
         if (Reroll)
         {
-            Reroll = false;
             Turntable(1);
+        }
+        else if (SortOrder)
+        {
+            Turntable(2);
         }
 
         if (DebugRerollRNG)
@@ -44,6 +48,8 @@ public class BattleMode : MonoBehaviour
             DiceRollSetOrder();
             DebugRerollRNG = false;
         }
+        if (UnitIndex.Count != 0)
+            TestOutput = UnitIndex[0];
     }
 
     int DiceRollSetOrder()
@@ -57,6 +63,7 @@ public class BattleMode : MonoBehaviour
         switch (_state)
         {
             case 1: //Sets a value for each unit. Higher the value, the first to make a move.
+                Reroll = false;
                 for (int i = 0; i < UnitRoll.Length; i++)
                 {
                     UnitRoll[i] = DiceRollSetOrder();
@@ -79,6 +86,7 @@ public class BattleMode : MonoBehaviour
                         }
                     }
                 }
+                SortOrder = true;
                 break;
             case 2: //Set list of turns
                 for (int d = 11; d > 0; d--)
@@ -87,10 +95,11 @@ public class BattleMode : MonoBehaviour
                     {
                         if (UnitRoll[i] == d)
                         {
-                            UnitIndex.Add(3);
+                            UnitIndex.Add(i);
                         }
                     }
                 }
+                SortOrder = false;
                 break;
         }
     }
@@ -117,44 +126,15 @@ public class BattleMode : MonoBehaviour
     void UIParty_Update()
     {
         Text UITextBox;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < gl.Character.Length; i++)
         {
             //Party Member UI
-            switch (gl.Character[i].MemberID)
-            {
-                case 1:
-                    UITextBox = GameObject.Find("Panel A/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel A/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel A/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-                case 2:
-                    UITextBox = GameObject.Find("Panel B/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel B/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel B/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-                case 3:
-                    UITextBox = GameObject.Find("Panel C/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel C/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel C/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-                case 4:
-                    UITextBox = GameObject.Find("Panel D/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel D/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel D/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-            }
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/Name").GetComponent<Text>();
+            UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/HP/Value").GetComponent<Text>();
+            UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/Mana/Value").GetComponent<Text>();
+            UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
         }
 
     }
@@ -170,5 +150,19 @@ public class BattleMode : MonoBehaviour
 
 
 
+    }
+
+    void UITurn_Update()
+    {
+        Image UIImageBox;
+        for (int i = 0; i < gl.Character.Length; i++)
+        {
+            UIImageBox = GameObject.Find("Panel " + (i + 1) + "/Arrow").GetComponent<Image>();
+            if (UnitIndex[0] == i)
+                UIImageBox.enabled = true;
+            else
+                UIImageBox.enabled = false;
+
+        }
     }
 }
