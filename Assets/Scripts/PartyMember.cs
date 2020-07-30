@@ -63,9 +63,6 @@ public class PartyMember : MonoBehaviour
 
     public PartyMember(int _memberID, int _exp)
     {
-        Level = 1;
-
-
         MemberID = _memberID;
         Exp = _exp;
 
@@ -78,9 +75,6 @@ public class PartyMember : MonoBehaviour
 
     public void Start()
     {
-        Level = 1;
-
-
         UpdateStats();
 
         HP = maxHP;
@@ -105,7 +99,6 @@ public class PartyMember : MonoBehaviour
 
         int prevLevel = Level;
 
-        if (Level > 0)
         for (int lv = 0; lv <= MAX_LEVEL; lv++)
         {
             if (Exp >= NextExp())
@@ -113,11 +106,12 @@ public class PartyMember : MonoBehaviour
                 Level = lv;
             }
         }
+        if (Level <= 0)
+            Level = 1;
+        maxHP = Convert.ToInt32(baseHP * (Level * HPMultiplier));
+        maxMana = Convert.ToInt32(baseMana * (Level * ManaMultiplier));
 
-            maxHP = Convert.ToInt32(baseHP * (Level * HPMultiplier));
-            maxMana = Convert.ToInt32(baseMana * (Level * ManaMultiplier));
-
-            Stat_Attack = Convert.ToInt32(baseAtk * (Level * AtkMultiplier));
+        Stat_Attack = Convert.ToInt32(baseAtk * (Level * AtkMultiplier));
 
         if (prevLevel < Level) //If the character levels up, health and mana is reset.
         {

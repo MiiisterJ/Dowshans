@@ -10,52 +10,142 @@ public class BattleMode : MonoBehaviour
 
     public int TestOutput;
 
-    public int rng;
+    public int dice;
 
     int BattleState;
 
-    public bool RerollRNG;
+    public List<int> UnitIndex = new List<int>();
+    public int[] UnitRoll = new int[5]; // 1 to 4 are the party members. 5 is the enemy.
+    public bool DebugRerollRNG;
+    bool Reroll;
+    bool SortOrder;
+
+    Button AttackButt, DefendButt, SpecialButt, RunButt;
 
     // Start is called before the first frame update
     void Awake()
     {
+        //Assigning Buttons
+        AttackButt = GameObject.Find("AttackButton").GetComponent<Button>();
+        DefendButt = GameObject.Find("DefendButton").GetComponent<Button>();
+        SpecialButt = GameObject.Find("SpecialButton").GetComponent<Button>();
+        RunButt = GameObject.Find("RunButton").GetComponent<Button>();
+
+        AttackButt.onClick.AddListener(ButtonFunction_Attack);
+        DefendButt.onClick.AddListener(ButtonFunction_Defend);
+        SpecialButt.onClick.AddListener(ButtonFunction_Special);
+        RunButt.onClick.AddListener(ButtonFunction_Run);
+
+
         gl = FindObjectOfType<GameLogic>();
         opponent = FindObjectOfType<EnemyStats>();
-        //TestOutput = opponent.enemyID;
-        //UIParty_Update();
-        //UIEnemy_Update();
+        UIParty_Update();
+        UIEnemy_Update();
+        Turntable(1);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (RerollRNG)
+        if (Reroll)
         {
-            Turntable();
-            RerollRNG = false;
+            Turntable(1);
         }
+        else if (SortOrder)
+        {
+            Turntable(2);
+            UITurn_Update();
+        }
+
+        if (DebugRerollRNG)
+        {
+            DiceRollSetOrder();
+            DebugRerollRNG = false;
+        }
+        if (UnitIndex.Count != 0)
+            TestOutput = UnitIndex[0];
+
+        StateCheck();
     }
 
-    void DiceRollSetOrder()
+    int DiceRollSetOrder()
     {
-
+        dice = Random.Range(1, 11);
+        return dice;
     }
 
-    void Turntable() //Each character taking turns
+    void Turntable(int _state) //Each character taking turns
     {
-        rng = Random.Range(1, 6);
+        switch (_state)
+        {
+            case 1: //Sets a value for each unit. Higher the value, the first to make a move.
+                Reroll = false;
+                for (int i = 0; i < UnitRoll.Length; i++)
+                {
+                    UnitRoll[i] = DiceRollSetOrder();
+                }
+                for (int f = 0; f < UnitRoll.Length; f++) //Checks if there's a tie in the dice roll.
+                {
+                    for (int l = 0; l < UnitRoll.Length; l++)
+                    {
+                        if (f != l) //Prevents the same index from comparing to each other.
+                        {
+                            if (UnitRoll[f] == UnitRoll[l])
+                            {
+                                UnitRoll[f] = DiceRollSetOrder();
+                                UnitRoll[l] = DiceRollSetOrder();
+                            }
+                            if (UnitRoll[f] == UnitRoll[l])
+                            {
+                                Reroll = true;
+                            }
+                        }
+                    }
+                }
+                SortOrder = true;
+                break;
+            case 2: //Set list of turns
+                for (int d = 11; d > 0; d--)
+                {
+                    for (int i = 0; i < UnitRoll.Length; i++)
+                    {
+                        if (UnitRoll[i] == d)
+                        {
+                            UnitIndex.Add(i);
+                        }
+                    }
+                }
+                SortOrder = false;
+                break;
+        }
     }
 
     void StateCheck() // Swtich statement indicating what stat the battle is in.
     {
+        Image UIImageBox;
         switch (BattleState)
         {
             case 1: //Player or enemy turn
+                if (UnitIndex[0] < 4) //Player Turn
+                {
+                    UIImageBox = GameObject.Find("UserInput").GetComponent<Image>();
+                    UIImageBox.enabled = true;
+                }
+                else
+                {
+                    UIImageBox = GameObject.Find("UserInput").GetComponent<Image>();
+                    UIImageBox.enabled = false;
+                }
                 break;
-            case 2: //Attack/Ability state. Calculate damage or healing.
+            case 2: //When a action is selected, activate action
+
                 break;
-            case 3: //End turn state. Switch to next person.
+            case 3: //Attack/Ability state. Calculate damage or healing.
+
+                break;
+            case 4: //End turn state. Switch to next person.
+
                 break; 
         }
     }
@@ -63,44 +153,15 @@ public class BattleMode : MonoBehaviour
     void UIParty_Update()
     {
         Text UITextBox;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < gl.Character.Length; i++)
         {
             //Party Member UI
-            switch (gl.Character[i].MemberID)
-            {
-                case 1:
-                    UITextBox = GameObject.Find("Panel A/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel A/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel A/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-                case 2:
-                    UITextBox = GameObject.Find("Panel B/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel B/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel B/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-                case 3:
-                    UITextBox = GameObject.Find("Panel C/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel C/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel C/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-                case 4:
-                    UITextBox = GameObject.Find("Panel D/Name").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
-                    UITextBox = GameObject.Find("Panel D/HP/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
-                    UITextBox = GameObject.Find("Panel D/Mana/Value").GetComponent<Text>();
-                    UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
-                    break;
-            }
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/Name").GetComponent<Text>();
+            UITextBox.text = gl.Character[i].Name + " Lvl. " + gl.Character[i].Level;
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/HP/Value").GetComponent<Text>();
+            UITextBox.text = gl.Character[i].HP + " / " + gl.Character[i].maxHP;
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/Mana/Value").GetComponent<Text>();
+            UITextBox.text = gl.Character[i].Mana + " / " + gl.Character[i].maxMana;
         }
 
     }
@@ -115,6 +176,56 @@ public class BattleMode : MonoBehaviour
         UITextBox.text = opponent.HP + " / " + opponent.maxHP;
 
 
+
+    }
+
+    void UITurn_Update()
+    {
+        Image UIImageBox;
+        //Party Member Arrows
+        for (int i = 0; i < gl.Character.Length; i++)
+        {
+            UIImageBox = GameObject.Find("Panel " + (i + 1) + "/Arrow").GetComponent<Image>();
+            if (UnitIndex[0] == i)
+                UIImageBox.enabled = true;
+            else
+                UIImageBox.enabled = false;
+
+        }
+        //Enemy Arrow
+        UIImageBox = GameObject.Find("EnemyPanel/Arrow").GetComponent<Image>();
+        if (UnitIndex[0] == 4)
+            UIImageBox.enabled = true;
+        else
+            UIImageBox.enabled = false;
+
+        // "Someone's Turn"
+        Text UITextBox;
+        string endingText = "'s Turn";
+        UITextBox = GameObject.Find("UnitTurn").GetComponent<Text>();
+        for (int i = 0; i < gl.Character.Length; i++)
+        {
+            if (UnitIndex[0] == i)
+                UITextBox.text = gl.Character[i].Name + endingText;
+        }
+        if (UnitIndex[0] == 4)
+            UITextBox.text = opponent.Name + endingText;
+    }
+
+    void ButtonFunction_Attack()
+    {
+        
+    }
+    void ButtonFunction_Defend()
+    {
+
+    }
+    void ButtonFunction_Special()
+    {
+
+    }
+    void ButtonFunction_Run()
+    {
 
     }
 }

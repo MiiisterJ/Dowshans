@@ -75,7 +75,7 @@ public class GameLogic : MonoBehaviour
 
         if (UpdateUI)
         {
-            if (SceneName == "Rocky Mountains" || SceneName == "Dark Castle")
+            //if (SceneName == "Rocky Mountains" || SceneName == "Dark Castle")
                 UI_Update();
             testOutput++;
             UpdateUI = false;
@@ -90,7 +90,7 @@ public class GameLogic : MonoBehaviour
     void UI_Update()
     {
         Text UITextBox;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Character.Length; i++)
         {
             switch (Character[i].MemberID)
             {
