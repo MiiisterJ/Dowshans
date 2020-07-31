@@ -23,6 +23,10 @@ public class BattleMode : MonoBehaviour
     GameObject UIMenu;
     Button AttackButt, DefendButt, SpecialButt, RunButt;
 
+    const int MAX_ANI_FRAMES = 30;
+    int animationFrame = MAX_ANI_FRAMES;
+    int enemyWaitTimer = MAX_ANI_FRAMES;
+
     int BattleMove;
 
     // Start is called before the first frame update
@@ -119,7 +123,7 @@ public class BattleMode : MonoBehaviour
 
     void StateCheck() // Swtich statement indicating what stat the battle is in.
     {
-        
+        GameObject unit;
         switch (BattleState)
         {
             case 0: //First turn of battle. Sets up turns for players and enemy.
@@ -139,16 +143,32 @@ public class BattleMode : MonoBehaviour
                 {
                     UIMenu.SetActive(true);
                 }
-                else
+                else //Enemy Turn
                 {
                     UIMenu.SetActive(false);
-
+                    EnemyAI_Select();
                 }
                 if (BattleMove > 0)
                     BattleState = 2;
                 break;
             case 2: //When an action is selected, activate action
                 UIMenu.SetActive(false);
+                if (UnitIndex[0] < 4) //Player Turn
+                {
+                    for (int i = 0; i < gl.Character.Length; i++)
+                    {
+                        if (UnitIndex[0] == i) //Player Turn
+                        {
+                            unit = GameObject.Find("Character " + (i + 1));
+                            AnimationState(unit, 1);
+                        }
+                    }
+                }
+                else
+                {
+                    unit = opponent.gameObject;
+                    AnimationState(unit, 1);
+                }
                 break;
             case 3: //Attack/Ability state. Calculate damage or healing.
 
@@ -191,6 +211,7 @@ public class BattleMode : MonoBehaviour
     void UITurn_Update()
     {
         Image UIImageBox;
+        Text UITextBox;
         //Party Member Arrows
         for (int i = 0; i < gl.Character.Length; i++)
         {
@@ -208,8 +229,25 @@ public class BattleMode : MonoBehaviour
         else
             UIImageBox.enabled = false;
 
+        //Party Member Next indicator
+        for (int i = 0; i < gl.Character.Length; i++)
+        {
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/Next").GetComponent<Text>();
+            if (UnitIndex[1] == i)
+                UITextBox.enabled = true;
+            else
+                UITextBox.enabled = false;
+
+        }
+        //Enemy Next indicator
+        UITextBox = GameObject.Find("EnemyPanel/Next").GetComponent<Text>();
+        if (UnitIndex[1] == 4)
+            UITextBox.enabled = true;
+        else
+            UITextBox.enabled = false;
+
+
         // "Someone's Turn"
-        Text UITextBox;
         string endingText = "'s Turn";
         UITextBox = GameObject.Find("UnitTurn").GetComponent<Text>();
         for (int i = 0; i < gl.Character.Length; i++)
@@ -240,6 +278,51 @@ public class BattleMode : MonoBehaviour
 
     void EnemyAI_Select()
     {
-        int selection = Random.Range(1, 4);
+        if (enemyWaitTimer > 0)
+            enemyWaitTimer--;
+        else
+        {
+            int selection = Random.Range(1, 4); //1 to 3
+            BattleMove = selection; //Makes selection
+            enemyWaitTimer = MAX_ANI_FRAMES;
+        }
+    }
+
+    void AnimationState(GameObject _unit, int _state)
+    {
+        switch (_state)
+        {
+            case 1: //Character moving in.
+                if (_unit.tag == "Player") //Character Movement
+                {
+                    if (animationFrame > 0)
+                    {
+                        _unit.transform.Translate(0, 0, 0.1f);
+                        animationFrame--;
+                    }
+                    else
+                    {
+                        animationFrame = MAX_ANI_FRAMES;
+                        BattleState = 3;
+                    }
+                }
+                else //Monster Movement
+                {
+                    if (animationFrame > 0)
+                    {
+                        _unit.transform.Translate(0.1f, 0, 0);
+                        animationFrame--;
+                    }
+                    else
+                    {
+                        animationFrame = MAX_ANI_FRAMES;
+                        BattleState = 3;
+                    }
+                }
+                break;
+
+            case 2:
+                break;
+        }
     }
 }

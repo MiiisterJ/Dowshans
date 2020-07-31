@@ -5012,10 +5012,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 259912011261142978, guid: 0ab53535c0e60f743b4fff2380d140f3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 259912011261142979, guid: 0ab53535c0e60f743b4fff2380d140f3,
         type: 3}
       propertyPath: m_Name
       value: Openworld UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 259912011261142979, guid: 0ab53535c0e60f743b4fff2380d140f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 259912011261142983, guid: 0ab53535c0e60f743b4fff2380d140f3,
         type: 3}

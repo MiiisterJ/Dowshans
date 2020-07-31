@@ -162,6 +162,17 @@ public class GameLogic : MonoBehaviour
         {
             escPress = false;
         }
+
+        if (SceneName == "Battle Scene")
+        {
+            TitleButt.enabled = false;
+            TitleButt.GetComponent<Image>().color = Color.gray;
+        }
+        else
+        {
+            TitleButt.enabled = true;
+            TitleButt.GetComponent<Image>().color = Color.white;
+        }
     }
 
     void ExitFunction()
