@@ -23,7 +23,7 @@ public class Title_Buttons : MonoBehaviour
 
     void StartGame()
     {
-        //SceneManager.LoadScene("Rocky Mountains");
-        SceneManager.LoadScene("Dark Castle");
+        SceneManager.LoadScene("Rocky Mountains");
+        //SceneManager.LoadScene("Dark Castle");
     }
 }

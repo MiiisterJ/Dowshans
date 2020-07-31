@@ -20,12 +20,17 @@ public class BattleMode : MonoBehaviour
     bool Reroll;
     bool SortOrder;
 
+    GameObject UIMenu;
     Button AttackButt, DefendButt, SpecialButt, RunButt;
+
+    int BattleMove;
 
     // Start is called before the first frame update
     void Awake()
     {
         //Assigning Buttons
+        UIMenu = GameObject.Find("UserInput");
+
         AttackButt = GameObject.Find("AttackButton").GetComponent<Button>();
         DefendButt = GameObject.Find("DefendButton").GetComponent<Button>();
         SpecialButt = GameObject.Find("SpecialButton").GetComponent<Button>();
@@ -48,16 +53,7 @@ public class BattleMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Reroll)
-        {
-            Turntable(1);
-        }
-        else if (SortOrder)
-        {
-            Turntable(2);
-            UITurn_Update();
-        }
-
+        
         if (DebugRerollRNG)
         {
             DiceRollSetOrder();
@@ -123,23 +119,36 @@ public class BattleMode : MonoBehaviour
 
     void StateCheck() // Swtich statement indicating what stat the battle is in.
     {
-        Image UIImageBox;
+        
         switch (BattleState)
         {
+            case 0: //First turn of battle. Sets up turns for players and enemy.
+                if (Reroll)
+                {
+                    Turntable(1);
+                }
+                else if (SortOrder)
+                {
+                    Turntable(2);
+                    UITurn_Update();
+                    BattleState = 1;
+                }
+                break;
             case 1: //Player or enemy turn
                 if (UnitIndex[0] < 4) //Player Turn
                 {
-                    UIImageBox = GameObject.Find("UserInput").GetComponent<Image>();
-                    UIImageBox.enabled = true;
+                    UIMenu.SetActive(true);
                 }
                 else
                 {
-                    UIImageBox = GameObject.Find("UserInput").GetComponent<Image>();
-                    UIImageBox.enabled = false;
-                }
-                break;
-            case 2: //When a action is selected, activate action
+                    UIMenu.SetActive(false);
 
+                }
+                if (BattleMove > 0)
+                    BattleState = 2;
+                break;
+            case 2: //When an action is selected, activate action
+                UIMenu.SetActive(false);
                 break;
             case 3: //Attack/Ability state. Calculate damage or healing.
 
@@ -214,18 +223,23 @@ public class BattleMode : MonoBehaviour
 
     void ButtonFunction_Attack()
     {
-        
+        BattleMove = 1;
     }
     void ButtonFunction_Defend()
     {
-
+        BattleMove = 2;
     }
     void ButtonFunction_Special()
     {
-
+        BattleMove = 3;
     }
     void ButtonFunction_Run()
     {
+        BattleMove = 4;
+    }
 
+    void EnemyAI_Select()
+    {
+        int selection = Random.Range(1, 4);
     }
 }
