@@ -38,9 +38,20 @@ public class ReadOnlyDrawer : PropertyDrawer
 
 public class GameLogic : MonoBehaviour
 {
+    public GameObject Instance;
+
     public Scene ActiveScene;
     public string SceneName;
     public LoadSceneMode SceneMode;
+
+    //Pause Stuff
+    public GameObject pauseMenuPrefab;
+#if DEBUG
+    [ReadOnly] [SerializeField]
+#endif
+    bool Pause;
+    bool escPress;
+    public Button ContinueButt, TitleButt, ExitButt;
 
     public PartyMember[] Character = new PartyMember[4];
 
@@ -55,10 +66,24 @@ public class GameLogic : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        if (Instance == null)
+        {
+            Instance = gameObject;
+        }
+        if (FindObjectsOfType<GameLogic>().Length != 1)
+        {
+            GameObject.Destroy(Instance);
+        }
+
+
     }
     // Start is called before the first frame update
     void Start()
     {
+        ContinueButt.onClick.AddListener(ContinueFunction);
+        TitleButt.onClick.AddListener(TitleScreenFunction);
+        ExitButt.onClick.AddListener(ExitFunction);
+
         testOutput++;
     }
 
@@ -75,11 +100,13 @@ public class GameLogic : MonoBehaviour
 
         if (UpdateUI)
         {
-            if (SceneName == "Rocky Mountains" || SceneName == "Dark Castle")
-                UI_Update();
+            //if (SceneName == "Rocky Mountains" || SceneName == "Dark Castle")
+            UI_Update();
             testOutput++;
             UpdateUI = false;
         }
+
+        PauseMenu();
     }
 
     void LoadFile_ExperiencePoints()
@@ -90,7 +117,7 @@ public class GameLogic : MonoBehaviour
     void UI_Update()
     {
         Text UITextBox;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Character.Length; i++)
         {
             switch (Character[i].MemberID)
             {
@@ -114,5 +141,35 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    void PauseMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (escPress == false && Pause == false)
+            {
+                pauseMenuPrefab.SetActive(true);
+                Pause = !Pause;
+                escPress = true;
+            }
+            if (escPress == false && Pause == true)
+            {
+                pauseMenuPrefab.SetActive(false);
+                Pause = !Pause;
+                escPress = true;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            escPress = false;
+        }
+    }
 
+    void ExitFunction()
+    { Application.Quit(); }
+
+    void ContinueFunction()
+    { pauseMenuPrefab.SetActive(false); Pause = false; }
+
+    void TitleScreenFunction()
+    { SceneManager.LoadScene("Title Screen"); pauseMenuPrefab.SetActive(false); Pause = false; }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1084616485542091417}
   - component: {fileID: 1084616485542091418}
   - component: {fileID: 1084616485542091422}
-  - component: {fileID: -4098361798354598563}
+  - component: {fileID: 606013596475025552}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -107,8 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9dec606a43f44eb7f8270b0120ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
---- !u!114 &-4098361798354598563
+  player: {fileID: 4534450920054332903, guid: 3aa3096be3cef16469e30663911b459a, type: 3}
+  EnemyType: {fileID: 606013596475025552}
+  moveSpeed: 0
+--- !u!114 &606013596475025552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,11 +119,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1084616485542091419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e57086085a831af4181ca238a60499f4, type: 3}
+  m_Script: {fileID: 11500000, guid: cec20b68693c84446856c65841acbecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  TextTest: {fileID: 0}
-  MonsterID: 1
-  Boss: 1
-  Level: 0
+  _name: 
+  _maxHP: 0
+  HP: 0
+  Level: 10
+  _attackPower: 0
+  isBoss: 1
+  enemyID: 1

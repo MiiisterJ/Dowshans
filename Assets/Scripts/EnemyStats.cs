@@ -78,14 +78,14 @@ public class EnemyStats : MonoBehaviour
             switch (_IDnum)
             {
                 case 1:
-                    Name = "Boss1";
+                    Name = "Taurspot";
                     baseHP = 100;
-                    baseAtk = 25;
+                    baseAtk = 10;
                     break;
                 case 2:
-                    Name = "Boss2";
+                    Name = "King Rhinoker";
                     baseHP = 100;
-                    baseAtk = 25;
+                    baseAtk = 10;
                     break;
             }
         else
@@ -93,19 +93,19 @@ public class EnemyStats : MonoBehaviour
             {
                 case 1:
                 default:
-                    Name = "Boogyman";
+                    Name = "Trinker";
                     baseHP = 10;
-                    baseAtk = 3;
+                    baseAtk = 1;
                     break;
                 case 2:
-                    Name = "Enemy2";
-                    baseHP = 10;
+                    Name = "Beard-Bat";
+                    baseHP = 12;
                     baseAtk = 3;
                     break;
                 case 3:
-                    Name = "Enemy3";
+                    Name = "Clawspur";
                     baseHP = 10;
-                    baseAtk = 3;
+                    baseAtk = 4;
                     break;
 
             }
