@@ -211,6 +211,7 @@ public class BattleMode : MonoBehaviour
     void UITurn_Update()
     {
         Image UIImageBox;
+        Text UITextBox;
         //Party Member Arrows
         for (int i = 0; i < gl.Character.Length; i++)
         {
@@ -228,8 +229,25 @@ public class BattleMode : MonoBehaviour
         else
             UIImageBox.enabled = false;
 
+        //Party Member Next indicator
+        for (int i = 0; i < gl.Character.Length; i++)
+        {
+            UITextBox = GameObject.Find("Panel " + (i + 1) + "/Next").GetComponent<Text>();
+            if (UnitIndex[1] == i)
+                UITextBox.enabled = true;
+            else
+                UITextBox.enabled = false;
+
+        }
+        //Enemy Next indicator
+        UITextBox = GameObject.Find("EnemyPanel/Next").GetComponent<Text>();
+        if (UnitIndex[1] == 4)
+            UITextBox.enabled = true;
+        else
+            UITextBox.enabled = false;
+
+
         // "Someone's Turn"
-        Text UITextBox;
         string endingText = "'s Turn";
         UITextBox = GameObject.Find("UnitTurn").GetComponent<Text>();
         for (int i = 0; i < gl.Character.Length; i++)
