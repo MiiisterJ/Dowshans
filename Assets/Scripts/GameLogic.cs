@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using System;
 
+/// Added minor descriptions by Jihad
+
 #region Read Only Inspector
 #if DEBUG
 public class ReadOnlyAttribute : PropertyAttribute
@@ -57,6 +59,8 @@ public class GameLogic : MonoBehaviour
 
     int GameMode;
     public bool UpdateUI;
+
+    //These are variables to tell the game logic to add in the game, such as button inputs, escape, pause, cotinue buttons and interconnect each scene with each other
 #if DEBUG
     [ReadOnly] [SerializeField]
 #endif
@@ -75,6 +79,7 @@ public class GameLogic : MonoBehaviour
             GameObject.Destroy(Instance);
         }
 
+        //This script tells the game logic to destroy the other copy of a game logic if it duplicates
 
     }
     // Start is called before the first frame update
@@ -86,6 +91,8 @@ public class GameLogic : MonoBehaviour
 
         testOutput++;
     }
+    
+    //This script tells the game logic to have functions that are clickable with exit button, title button and continue button
 
     // Update is called once per frame
     void Update()
@@ -108,6 +115,8 @@ public class GameLogic : MonoBehaviour
 
         PauseMenu();
     }
+    
+    //This tells the game logic to update the UI with Rocky Mountains level and the Dark Castle Level
 
     void LoadFile_ExperiencePoints()
     {
@@ -140,6 +149,8 @@ public class GameLogic : MonoBehaviour
             }
         }
     }
+
+    // This script tells the game logic to update the UI with the character portraits once they level up
 
     void PauseMenu()
     {
@@ -175,6 +186,8 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    //This script tells the game logic to enable each button input for escape, so when you press it during the world map you will be able to use it properly, but  if it's in the battle scene it won't do it properly
+
     void ExitFunction()
     { Application.Quit(); }
 
@@ -184,3 +197,4 @@ public class GameLogic : MonoBehaviour
     void TitleScreenFunction()
     { SceneManager.LoadScene("Title Screen"); pauseMenuPrefab.SetActive(false); Pause = false; }
 }
+//This script has the button function for the continue, exit and the title screen on the UI if you press it
