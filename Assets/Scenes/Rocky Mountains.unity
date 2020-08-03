@@ -337,8 +337,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.31752536
+  m_Center: {x: 0, y: -0.67511255, z: 0}
 --- !u!23 &60833207
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1239,6 +1239,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1407,6 +1412,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1686,8 +1696,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.9999998, z: 1.8518437}
+  m_Center: {x: 0, y: 0, z: 0.425923}
 --- !u!23 &627761850
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1964,8 +1974,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.33419606
+  m_Center: {x: 0, y: -0.4948253, z: 0}
 --- !u!23 &753787672
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2231,6 +2241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2417,8 +2432,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.31773794
+  m_Center: {x: 0, y: -0.674326, z: 0}
 --- !u!23 &888710283
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2510,8 +2525,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.32583088
+  m_Center: {x: 0, y: -0.5762396, z: 0}
 --- !u!23 &897006546
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3302,6 +3317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3487,8 +3507,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.31576312
+  m_Center: {x: 0, y: -0.67898285, z: 0}
 --- !u!23 &1162640671
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4029,6 +4049,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4197,6 +4222,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4383,8 +4413,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.33381027
+  m_Center: {x: 0, y: -0.49597663, z: 0}
 --- !u!23 &1603284041
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4756,8 +4786,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.30246678
+  m_Center: {x: 0, y: -0.9156709, z: 0}
 --- !u!23 &1949307307
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5156,6 +5186,11 @@ PrefabInstance:
       propertyPath: EnemyAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1084616485542091417, guid: c11aba4b33900374998be7e1363001b2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68fdb26a1a3000a4f836c84e8f5abf86, type: 2}
     - target: {fileID: 1084616485542091419, guid: c11aba4b33900374998be7e1363001b2,
         type: 3}
       propertyPath: m_Name
@@ -5265,6 +5300,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7617487498055712274, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f47d0783e3168e42bbb5e64289ed6a8, type: 2}
     - target: {fileID: 7617487498055712492, guid: 9fe2121ba2c7c8d4ab7fd6b06d67c4a2,
         type: 3}
       propertyPath: m_LocalPosition.x

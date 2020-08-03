@@ -5,6 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// Coded by Max Seward (1TheBlueWii1)
+/// Added minor descriptions by Jihad
 /// </summary>
 public class PartyMember : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PartyMember : MonoBehaviour
     
     double HPMultiplier; //Used when a character levels up.
     int baseHP;
+
+    //These are all variables which tells the game of each party member, what their ID is, name, if they're in party and their base HP.
 #if DEBUG
     [ReadOnly] [SerializeField]
 #endif
@@ -36,12 +39,15 @@ public class PartyMember : MonoBehaviour
     public int maxMana { get { return _maxMana; } private set { _maxMana = value; } }
     public int Mana;
 
+    //These tell what each members Max Hp is and what their Max Mana is
 #if DEBUG
     [ReadOnly] [SerializeField]
 #endif
     int _level;
     public int Level { get { return _level; } private set { if (value <= 0) _level = 1; else _level = value; } }
     public int Exp;
+
+    //This script will tell which level, which value and what EXP the player has
 #if DEBUG
     [ReadOnly] [SerializeField]
 #endif
@@ -52,6 +58,8 @@ public class PartyMember : MonoBehaviour
 
     double AtkMultiplier; //Used when a character levels up.
     int baseAtk;
+
+    //This script tells the game if you level up the player, they will receieve a multipler boost in their HP, and Atk
 #if DEBUG
     [ReadOnly] [SerializeField]
 #endif
@@ -60,7 +68,7 @@ public class PartyMember : MonoBehaviour
 
     public bool UpdateCharacterStats;
 
-
+    //These are variables to set on unity to tell the attack power, stats of the attack and the updated character stats
     public PartyMember(int _memberID, int _exp)
     {
         MemberID = _memberID;
@@ -89,6 +97,8 @@ public class PartyMember : MonoBehaviour
             UpdateCharacterStats = false;
         }
     }
+    //This tells the game to update the stats if a certain threshold has been reached and once it's reached the game should be updated to fit the current character stats.
+
 
     /// <summary>
     /// In case a character levels up, run this to update the character's maximum HP and Mana.
@@ -126,6 +136,8 @@ public class PartyMember : MonoBehaviour
 
         NextExp();
     }
+    //This script tells the game to update the stats after a battle has been set and update the player with its current HP, Mana and Level
+
 
     /// <summary>
     /// Profile of party members you have.
@@ -177,7 +189,7 @@ public class PartyMember : MonoBehaviour
                 break;
         }
     }
-
+    // Thes are multipliers set to each of the party members and can be adjusted at any time. 
 }
 
 

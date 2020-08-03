@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// Added minor descriptions by Jihad
 public class BattleMode : MonoBehaviour
 {
     GameLogic gl;
@@ -19,6 +20,8 @@ public class BattleMode : MonoBehaviour
     public bool DebugRerollRNG;
     bool Reroll;
     bool SortOrder;
+    
+    // These are variables that tells the battle mode to set a dice roll during the encounter
 
     GameObject UIMenu;
     Button AttackButt, DefendButt, SpecialButt, RunButt;
@@ -28,6 +31,8 @@ public class BattleMode : MonoBehaviour
     int enemyWaitTimer = MAX_ANI_FRAMES;
 
     int BattleMove;
+
+    // These are button inputs for the attack, defend, special and run buttons and their set in the UI for the player to press on them
 
     // Start is called before the first frame update
     void Awake()
@@ -53,6 +58,9 @@ public class BattleMode : MonoBehaviour
         Turntable(1);
 
     }
+
+
+    //These scripts tells the game logic to find each of the buttons and have a clickable function with each of the buttons, and they will also update whenever the enemy has the first turn
 
     // Update is called once per frame
     void Update()
@@ -120,7 +128,7 @@ public class BattleMode : MonoBehaviour
                 break;
         }
     }
-
+    // These scripts are telling in the dice roll who goes first, from the highest to lowest, and in that order
     void StateCheck() // Swtich statement indicating what stat the battle is in.
     {
         GameObject unit;
@@ -178,7 +186,7 @@ public class BattleMode : MonoBehaviour
                 break; 
         }
     }
-
+    //This script indicates who's turn it is during the battle and it highlights who's next as well
     void UIParty_Update()
     {
         Text UITextBox;
@@ -194,7 +202,7 @@ public class BattleMode : MonoBehaviour
         }
 
     }
-
+    //This script will find the UI textbox for the each of ther Party Members name and the value of its HP and update it
     void UIEnemy_Update()
     {
         Text UITextBox;
@@ -205,9 +213,9 @@ public class BattleMode : MonoBehaviour
         UITextBox.text = opponent.HP + " / " + opponent.maxHP;
 
 
-
+        
     }
-
+    //This script will find the UI textbox for the Enemy name and the value of its HP and update it
     void UITurn_Update()
     {
         Image UIImageBox;
@@ -258,7 +266,7 @@ public class BattleMode : MonoBehaviour
         if (UnitIndex[0] == 4)
             UITextBox.text = opponent.Name + endingText;
     }
-
+    // This script will tell when it's either the player's or the enemies' turn, and it will also say which one of the characters' turn it is whether it's Rocky, Luke, Jane, Phoenix or the enemy
     void ButtonFunction_Attack()
     {
         BattleMove = 1;
@@ -276,6 +284,7 @@ public class BattleMode : MonoBehaviour
         BattleMove = 4;
     }
 
+    // These scripts are all functions on the battle mode for attacking, defending, using special attacks and running
     void EnemyAI_Select()
     {
         if (enemyWaitTimer > 0)
@@ -287,7 +296,7 @@ public class BattleMode : MonoBehaviour
             enemyWaitTimer = MAX_ANI_FRAMES;
         }
     }
-
+    // This is a random range set for the AI's turn to attack any of the players from 1-4
     void AnimationState(GameObject _unit, int _state)
     {
         switch (_state)
@@ -326,3 +335,4 @@ public class BattleMode : MonoBehaviour
         }
     }
 }
+// This is an animation set, that will move the player figure forward when it attacks, and stand still when it defends

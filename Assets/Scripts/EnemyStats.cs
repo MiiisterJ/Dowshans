@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Do NOT apply this to a game object. This is called by the Enemy script.
-/// 
+/// Added minor descriptions by Jihad
 /// Coded by Max Seward (1TheBlueWii1)
 /// </summary>
 public class EnemyStats : MonoBehaviour
@@ -23,6 +23,9 @@ public class EnemyStats : MonoBehaviour
     int _maxHP;
     public int maxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public int HP;
+
+    //These are all varabies to tell each of the enemies stats
+
 
 //#if DEBUG
 //    [ReadOnly] [SerializeField]
@@ -47,6 +50,7 @@ public class EnemyStats : MonoBehaviour
 
         //Set maximum stats
         
+        //These variables will tell which one is a boss and what kind of attack power it has, and what level it is set on
     }
 
     public void Start()
@@ -66,6 +70,9 @@ public class EnemyStats : MonoBehaviour
 
         HP = maxHP;
     }
+
+    //This will update the starts of the enemies and bosses
+
 
     /// <summary>
     /// Profiles of enemies.
@@ -111,3 +118,4 @@ public class EnemyStats : MonoBehaviour
             }
     }
 }
+// These scripts tell what each of the enemies and bosses are called and what base attack and their base hp is. 
